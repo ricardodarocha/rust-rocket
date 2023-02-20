@@ -1,95 +1,112 @@
 
 <h1 align="center">
   <br>
-  <a href="http://www.ricardodarocha.com.br"><img src="https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.png" alt="Markdownify" width="200"></a>
+  <a href="http://www.ricardodarocha.com.br"><img src="https://styles.redditmedia.com/t5_2s7lj/styles/communityIcon_pjg3ktzyju771.png" alt="Rust" width="200"></a>
   <br>
-  Markdownify
+  Rust
   <br>
 </h1>
 
-<h4 align="center">About
-Uma forma simples de gerar templates no formato {{mustaches}} a partir de um arquivo json baseado em <a href="https://docs.rs/handlebars/latest/handlebars/" target="_blank">Handlebars</a>.</h4>
+<h4 align="center">About  </p>
+An example of using <a href="https://www.sqlite.org/index.html" target="_blank">SQLite</a> with <a href="https://docs.rs/sqlx/latest/sqlx" target="_blank">sqlx</a> and <a href="https://rocket.rs/" target="_blank">rocket</a> async to generate async apis.</h4>
+
+
 
 <p align="center">
-  <a href="https://badge.fury.io/js/electron-markdownify">
-    <img src="https://badge.fury.io/js/electron-markdownify.svg"
-         alt="Gitter">
-  </a>
-  <a href="https://gitter.im/amitmerchant1990/electron-markdownify"><img src="https://badges.gitter.im/amitmerchant1990/electron-markdownify.svg"></a>
-  <a href="https://saythanks.io/to/bullredeyes@gmail.com">
-      <img src="https://img.shields.io/badge/SayThanks.io-%E2%98%BC-1EAEDB.svg">
-  </a>
-  <a href="https://www.paypal.me/AmitMerchant">
-    <img src="https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&amp;style=flat">
-  </a>
-</p>
-
-<p align="center">
-  <a href="#introdução">Introdução</a> •
-  <a href="#como-usar">Como usar</a> •
+  <a href="#introdução">Introduction</a> •
+  <a href="#como-usar">How to use</a> •
   <a href="#download">Download</a> •
   <a href="#credits">Credits</a> •
   <a href="#related">Related</a> •
   <a href="#license">License</a>
 </p>
 
-![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
+![screenshot](https://i.ytimg.com/vi/VuVOyUbFSI0/maxresdefault.jpg)
 
-## Introdução
+## Introduction
 
-Se você pretende preencher um template de documento, você pode marcar os campos com um par de mustaches {{}}, no meio dessas chaves você coloca o nome do campo
+If you want a tiny web server providing some json from sqlite database you can try this.  
+It is also very simple to change the database (MySql, Postgres, SQLServer)
 
-**Exemplo**
+**Example**
+```rust
+
+#[derive(Serialize, Deserialize, Debug, FromRow)]
+struct User { 
+    id: i64,
+    name: String,
+    age: i64,
+ }
+
+#[get("/all")]
+async fn get_all() -> Json<Vec<User>> { 
+    //..
+    let result = sqlx::query_as!(User, "SELECT * FROM users")
+    .fetch_all(&mut connection)
+    .await
+    .unwrap();
+
+    return Json(result);
+}
+
 ```
-Olá {{usuario}},
-bem vindo ao sistema {{}}.
-Hoje é {{dd}} de {{mmmm}}.
-O tempo está {{tempo}}.
+
+The query can also have parameter
+**with parameter**
+```rust
+#[get("/one/<id>")]
+async fn get_by_id(id: u32) -> Json<Vec<User>> {  
+    //..
+    let result = sqlx::query_as!(User, "SELECT * FROM users where id = ?", id)
+        .fetch_all(&mut connection)
+        .await
+        .unwrap();
+
+    return Json(result);
+}
 ```
 
-Os campos podem ser substituídos por um conteúdo em JSON
-**dados.json**
-```json
-{"usuario": "Convidado",
-"sistema": "Rust",
-"dd": 26,
-"tempo": "ensolarado"
-}```
+This launches using Rocket api
+**launcher**
+```rust
+#[launch]
+fn rocket() -> _ {
+    rocket::build().mount("/", routes![
+        get_all,
+        get_by_id])
+}
+```
 
-##a Como usar
+## How to use
 
-Clone este repositório [Git](https://github.com/ricardodarocha/quick_template.git) 
-Rode o comando `cargo run -- arquivos/template.txt arquivos/dados.json gerado/documento.txt`
-Você verá que o documento.txt será criado na pasta "gerado"
+Clone this repositorio [Git](https://github.com/ricardodarocha/rust-rocket.git) 
+Run `cargo check cargo run`
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/ricardodarocha/quick_template.git
+$ git clone https://github.com/ricardodarocha/rust-rocket.git
 
 # Go into the repository
-$ cd quick_template
+$ cd rust-rocket
 
-# Abra com VSCode
+# Open with VSCode
 $ code .
 
-# Rode o aplicativo passando os parâmetros
-$ cargo run -- arquivos/template.txt arquivos/dados.json gerado/documento.txt
+# install and run
+$ cargo check
+$ cargo run 
 ```
 
 ## Download
 
-Você pode baixar a última versão estável do binário em ...
-
-## Emailware
-
-Caso necessite de suporte ou queira personalizar este projeto você pode entrar em contato comigo <ricardodarocha@outlook.com> 
+You can download sqliteStudio https://sqlitestudio.pl/  if want to customize the database
 
 ## Credits
 
 This software uses the following open source packages:
 
-- [Handlebars](https://docs.rs/handlebars/latest/handlebars)
-- [Serde_Json](https://docs.rs/serde_json/latest/serde_json/)
+- [sqlx](https://docs.rs/sqlx/latest/sqlx)
+- [rocket](https://crates.io/crates/rocket)
 
 ## Related
 
@@ -105,13 +122,17 @@ This software uses the following open source packages:
 
 ## You may also like...
 
-- [Tera](https://crates.io/crates/tera) 
-- [Tera-cli](https://crates.io/crates/tera-cli)
-- [Askama](https://crates.io/crates/askama)
-- [Minijinja](https://crates.io/crates/minijinja)
+- [Actix-Web](https://actix.rs/) 
+- [Axum](https://docs.rs/axum/latest/axum/)
+- [Tokio](https://github.com/tokio-rs)
+- [async-std](https://async.rs/)
+
+Other Databases
+- [Postgres](https://rust-lang-nursery.github.io/rust-cookbook/database/postgres.html)
 
 ## License
 
+GNU
 
 
 ---
