@@ -22,7 +22,7 @@ An example of using <a href="https://www.sqlite.org/index.html" target="_blank">
 </p>
 
 ![screenshot](https://i.ytimg.com/vi/VuVOyUbFSI0/maxresdefault.jpg)
-![screenshot](screenshot.gif)
+![screenshot](img/screenshot.gif)
 
 ## Introduction
 
