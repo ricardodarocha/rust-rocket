@@ -21,8 +21,8 @@ An example of using <a href="https://www.sqlite.org/index.html" target="_blank">
   <a href="#license">License</a>
 </p>
 
-![screenshot](https://i.ytimg.com/vi/VuVOyUbFSI0/maxresdefault.jpg)
 ![screenshot](img/screenshot.gif)
+![screenshot](https://i.ytimg.com/vi/VuVOyUbFSI0/maxresdefault.jpg)
 
 ## Introduction
 
