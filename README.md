@@ -21,6 +21,7 @@ An example of using <a href="https://www.sqlite.org/index.html" target="_blank">
   <a href="#license">License</a>
 </p>
 
+![screenshot](img/screenshot.gif)
 ![screenshot](https://i.ytimg.com/vi/VuVOyUbFSI0/maxresdefault.jpg)
 
 ## Introduction
@@ -52,7 +53,6 @@ async fn get_all() -> Json<Vec<User>> {
 ```
 
 The query can also have parameter
-**with parameter**
 ```rust
 #[get("/one/<id>")]
 async fn get_by_id(id: u32) -> Json<Vec<User>> {  
@@ -66,8 +66,7 @@ async fn get_by_id(id: u32) -> Json<Vec<User>> {
 }
 ```
 
-This launches using Rocket api
-**launcher**
+This launches using Rocket api  
 ```rust
 #[launch]
 fn rocket() -> _ {
