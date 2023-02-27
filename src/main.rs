@@ -2,7 +2,7 @@
 use rocket::serde::{Serialize, Deserialize, json::Json};
 use sqlx::{FromRow, Connection};
 
-//Model todo! Move to models.rs
+//todo! Move to models.rs
 #[derive(Serialize, Deserialize, Debug, FromRow)]
 struct User { 
     id: i64,
@@ -10,10 +10,8 @@ struct User {
     age: i64,
  }
 
-
-//database todo! Move to database.rs
-
 use sqlx::{Database, Sqlite, SqliteConnection};
+//todo! Move to routes.rs
 
 #[launch]
 fn rocket() -> _ {
@@ -23,7 +21,18 @@ fn rocket() -> _ {
         ])
 }
 
-//routes todo! Move to routes.rs
+#[get("/all")]
+async fn get_all() -> Json<Vec<User>> { 
+    get_sql::<User>("select * from users").await
+}
+
+
+#[get("/one/<id>")]
+async fn get_one(id: u32) -> Json<User> {  
+    get_by_id::<User>("SELECT * FROM users where id = ?", id).await
+}
+
+//todo! Move to database.rs
 #[macro_use]
 extern crate dotenv_codegen;
 
@@ -62,16 +71,4 @@ where
         .unwrap();
 
     return Json(result);
-}
-
-
-#[get("/all")]
-async fn get_all() -> Json<Vec<User>> { 
-    get_sql::<User>("select * from users").await
-}
-
-
-#[get("/one/<id>")]
-async fn get_one(id: u32) -> Json<User> {  
-    get_by_id::<User>("SELECT * FROM users where id = ?", id).await
 }
