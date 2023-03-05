@@ -1,7 +1,6 @@
 use rocket::serde::{Serialize, Deserialize};
 use sqlx::{FromRow};
 use chrono::prelude::*;
-use 
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct NewUser { 

@@ -5,7 +5,7 @@ use rocket::serde::json::Json;
 use models::{User, Product, Order, Cliente};
 use db::{get_sql, get_by_id};
 
-#[get("/all")]
+#[get("/user")]
 pub async fn get_all() -> Json<Vec<User>> { 
     get_sql::<User>("select * from usuarios").await
 }
@@ -22,7 +22,7 @@ pub async fn register() -> Json<Vec<User>> {
 }
 
 // Produtos
-#[get("/prod/all")]
+#[get("/prod")]
 pub async fn get_prod() -> Json<Vec<Product>> { 
     get_sql::<Product>("select * from view_produtos").await
 }
@@ -52,7 +52,7 @@ pub async fn update_order(id: i64) -> Json<Order> {
 }
 
 // Clientes
-#[get("/cli/all")]
+#[get("/cli")]
 pub async fn get_cli() -> Json<Vec<Cliente>> { 
     get_sql::<Cliente>("select * from view_clientes").await
     //todo! Add pagination
