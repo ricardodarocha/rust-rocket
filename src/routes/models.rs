@@ -2,6 +2,10 @@ use rocket::serde::{Serialize, Deserialize};
 use sqlx::{FromRow};
 use chrono::prelude::*;
 
+
+#[derive(Serialize, Deserialize, Debug, FromRow)]
+pub struct Tabelas (String);
+
 #[derive(Serialize, Deserialize, Debug)]
 pub struct NewUser { 
     nome: String,
@@ -19,15 +23,23 @@ pub struct User {
     email: String,
     criado: DateTime<Utc>,
  }
+// #[derive(Serialize, Deserialize, Debug, FromRow)]
+// pub struct Categoria {
+//     categoria_id: i64,
+//     categoria_nome: String,
+//     descricao: String,
+// }
+
 #[derive(Serialize, Deserialize, Debug, FromRow)]
 pub struct Product { 
-    productid: i64,
-    productname: String,
-    categoryid: i64,
-    categoryname: String,
-    description: String,
-    unit: String,
-    price: f64,
+    produto_id: i64,
+    produto_nome: String,
+    categoria_id: i64,
+    categoria_nome: String,
+    categoria_descricao: String,
+    unidade: String,
+    preco: f32,
+    estoque: f32,
  }
 #[derive(Serialize, Deserialize, Debug, FromRow)]
 pub struct Order { 

@@ -2,8 +2,18 @@ mod models;
 mod db;
 
 use rocket::serde::json::Json;
-use models::{User, Product, Order, Cliente};
+use models::{User, Product, Order, Cliente, Tabelas};
 use db::{get_sql, get_by_id};
+
+const WITH_WHERE: &'static str = " WHERE ";
+const WITH_LIMIT: &'static str = " LIMIT ";
+const WITH_OFFSET: &'static str = " OFFSET ";
+const DEF_PAGINATION: u16 = 50;
+
+#[get("/list")]
+pub async fn listar_tabelas() -> Json<Vec<Tabelas>> { 
+    get_sql::<Tabelas>("SELECT name FROM sqlite_schema ORDER BY name desc ").await
+}
 
 #[get("/user")]
 pub async fn get_all() -> Json<Vec<User>> { 
@@ -24,14 +34,54 @@ pub async fn register() -> Json<Vec<User>> {
 // Produtos
 #[get("/prod")]
 pub async fn get_prod() -> Json<Vec<Product>> { 
-    get_sql::<Product>("select * from view_produtos").await
+    const SELECT_ALL_PROD: &str = include_str!("../sql/all_prod.sql");
+    get_sql::<Product>(SELECT_ALL_PROD).await
+}
+
+fn fmt_query(sql: &str, query: &str, page: Option<u16>, pagination: Option<u16>) -> String {
+    let mut result = String::from(sql);
+    if !query.is_empty() {
+            result.push_str(WITH_WHERE);
+            result.push_str(query);
+        };
+
+    match (pagination, page) {
+        (None, Some(page_no)) => {
+            result.push_str(WITH_OFFSET);
+            let offset = (page_no - 1) * DEF_PAGINATION;
+            result.push_str(&*offset.to_string());
+        },
+        (Some(limit), None) => {
+            result.push_str(WITH_LIMIT);
+            result.push_str(&*limit.to_string());
+        },
+        (Some(limit), Some(page_no)) => {
+            result.push_str(WITH_LIMIT);
+            result.push_str(&*limit.to_string());
+            result.push_str(WITH_OFFSET);
+            let offset = (page_no - 1) * limit;
+            result.push_str(&*offset.to_string());
+        },
+        _ => (),
+    };
+
+    print!("{sql}");
+    result
+  
+}
+
+#[get("/prod?<query>&<page>&<pagination>")]
+pub async fn get_prod_query(query: &str, page: Option<u16>, pagination: Option<u16> ) -> Json<Vec<Product>> {  
+    const SELECT_ALL_PROD: &str = include_str!("../sql/all_prod.sql");
+    get_sql::<Product>(&fmt_query(SELECT_ALL_PROD, query, page, pagination)).await
 }
 
 #[get("/prod/<id>")]
 pub async fn get_one_product(id: i64) -> Json<Product> {  
-    get_by_id::<Product>("SELECT * FROM view_produtos where id = ?", id).await
+    const SELECT_ONE_PROD: &str = include_str!("../sql/prod.sql");
+    get_by_id::<Product>(SELECT_ONE_PROD, id).await
 }
-
+    
 // Order
 //todo! Add itens
 #[post("/oder/new")]
