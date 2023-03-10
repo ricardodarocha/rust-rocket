@@ -1,8 +1,8 @@
 -- SQLite
 SELECT
-    P.produto_id,
-    P.produto_nome,
-    C.categoria_id,
+    P.produto_id as id,
+    P.produto_nome as nome,
+    C.categoria_id as categoria,
     C.categoria_nome,
     C.descricao as categoria_descricao,
     P.unidade,
@@ -10,4 +10,4 @@ SELECT
     P.estoque
 FROM Produtos P
     inner join Categorias C on C.categoria_id  = P.categoria_id 
-    where P.produto_id = ?;
+    where id = ?

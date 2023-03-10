@@ -1,29 +1,39 @@
 mod routes;
 
+use rocket_dyn_templates::Template;
 use routes::{
-    get_all, get_cli, get_one, get_one_cli, get_one_product, get_prod, get_prod_query, listar_tabelas,
-    new_order, register, update_order,
+    api, get_all, get_cli, get_cli_query, get_one, get_one_cli, get_one_product, get_order,
+    get_prod, get_prod_query, listar_tabelas, new_order, not_found, register, update_order,
+    welcome,
 };
+
 #[macro_use]
 extern crate rocket;
 extern crate dotenv_codegen;
 
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount(
-        "/",
-        routes![
-            get_one,
-            get_all,
-            register,
-            get_prod,
-            get_prod_query,
-            get_one_product,
-            new_order,
-            update_order,
-            get_cli,
-            get_one_cli,
-            listar_tabelas
-        ],
-    )
+    rocket::build()
+        .attach(Template::fairing())
+        .mount(
+            "/",
+            routes![
+                get_one,
+                get_all,
+                get_order,
+                register,
+                get_prod,
+                get_prod_query,
+                get_one_product,
+                new_order,
+                update_order,
+                get_cli,
+                get_cli_query,
+                get_one_cli,
+                listar_tabelas,
+                api,
+                welcome,
+            ],
+        )
+        .register("/tera", catchers![not_found])
 }

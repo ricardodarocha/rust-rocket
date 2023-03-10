@@ -13,5 +13,6 @@ rocket = { version = "0.5.0-rc.2", features = ["json"] }
 dotenv = "0.15.0"
 dotenv_codegen = "0.15.0"
 chrono = { version = "0.4.23", features = ["serde"] }
+rocket_dyn_templates = { version = "0.1.0-rc.2", features = ["tera"] }
 # uuid = { version = "1.2.2", features = ["v4"] }
 
