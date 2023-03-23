@@ -1,0 +1,10 @@
+id;nome;contato;endereco;cidade;cep;pais;criado
+1;"Alfredo Mercearia";"Alfredo Anders";"Obere Str. 57";"Berlin";12209;"Alemanha";2023-03-06 15:53:59
+2;"Ana Tujilo Gelados";"Ana Tujilo";"Avda. de la Constitución 2222";"México D.F";5021;"Mexico";2023-03-06 15:53:59
+3;"Antonio Moreno Tacos";"Antonio Moreno";"Mataderos 2312";"México D.F";5023;"Mexico";2023-03-06 15:53:59
+4;"Açougue do Aroldo";"Haroldo Tomas Hardy";"120 Hanover Sq.";"London";"WA1 1DP";"Inglaterra";2023-03-06 15:54:00
+5;"Berlund Supermercado";"Christina Berglund";"Berguvsvägen 8";"Luleå";"S-958 22";"Suécia";2023-03-06 15:54:00
+6;"União Azul Embutidos";"Hanna Moos";"Forsterstr. 57;Mannheim";68306;"Alemanha";2023-03-06 15:54:00
+7;"Fazenda Blondel";"Frédérique Citeaux";"24, place Kléber";"Strasbourg";67000;"France";2023-03-06 15:54:01
+8;"Balidu Comidas preparadas";"Martín Sommer";"C/ Araquil, 67";"Madrid";28023;"Espanha";2023-03-06 15:54:01
+9;"Bon appetit";"Laurence Lebihans";"12 rue des Bouchers";"Marseille";13008;"France";2023-03-06 15:54:02

@@ -1,0 +1,26 @@
+{% extends "base" %}
+
+{% block content %}
+    <h1>Olá {{ user }}!</h1>
+    <h3>Algumas rotas que você pode tentar:</h3>
+
+    <section class="section">
+        <div class="container is-fluid">
+            <aside class="menu">
+                <ul class="menu-list">
+                    
+                    {% for item in items %}
+                        <li class="has-text-primary">{{item.verb}} <a href="{{item.sample}}" target="blank">{{item.url}}</a></li>
+                    {% endfor %}
+                    
+                </ul>
+            </aside>
+        </div>
+    </section>
+
+
+    
+
+    
+{% endblock content %}
+
