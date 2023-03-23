@@ -1,0 +1,92 @@
+[
+    {
+        "id": 1,
+        "nome": "Alfredo Mercearia",
+        "contato": "Alfredo Anders",
+        "endereco": "Obere Str. 57",
+        "cidade": "Berlin",
+        "cep": "12209",
+        "pais": "Alemanha",
+        "criado": "2023-03-06 15:53:59"
+    },
+    {
+        "id": 2,
+        "nome": "Ana Tujilo Gelados",
+        "contato": "Ana Tujilo",
+        "endereco": "Avda. de la Constitución 2222",
+        "cidade": "México D.F",
+        "cep": "5021",
+        "pais": "Mexico",
+        "criado": "2023-03-06 15:53:59"
+    },
+    {
+        "id": 3,
+        "nome": "Antonio Moreno Tacos",
+        "contato": "Antonio Moreno",
+        "endereco": "Mataderos 2312",
+        "cidade": "México D.F",
+        "cep": "5023",
+        "pais": "Mexico",
+        "criado": "2023-03-06 15:53:59"
+    },
+    {
+        "id": 4,
+        "nome": "Açougue do Aroldo",
+        "contato": "Haroldo Tomas Hardy",
+        "endereco": "120 Hanover Sq.",
+        "cidade": "London",
+        "cep": "WA1 1DP",
+        "pais": "Inglaterra",
+        "criado": "2023-03-06 15:54:00"
+    },
+    {
+        "id": 5,
+        "nome": "Berlund Supermercado",
+        "contato": "Christina Berglund",
+        "endereco": "Berguvsvägen 8",
+        "cidade": "Luleå",
+        "cep": "S-958 22",
+        "pais": "Suécia",
+        "criado": "2023-03-06 15:54:00"
+    },
+    {
+        "id": 6,
+        "nome": "União Azul Embutidos",
+        "contato": "Hanna Moos",
+        "endereco": "Forsterstr. 57",
+        "cidade": "Mannheim",
+        "cep": "68306",
+        "pais": "Alemanha",
+        "criado": "2023-03-06 15:54:00"
+    },
+    {
+        "id": 7,
+        "nome": "Fazenda Blondel",
+        "contato": "Frédérique Citeaux",
+        "endereco": "24, place Kléber",
+        "cidade": "Strasbourg",
+        "cep": "67000",
+        "pais": "France",
+        "criado": "2023-03-06 15:54:01"
+    },
+    {
+        "id": 8,
+        "nome": "Balidu Comidas preparadas",
+        "contato": "Martín Sommer",
+        "endereco": "C/ Araquil, 67",
+        "cidade": "Madrid",
+        "cep": "28023",
+        "pais": "Espanha",
+        "criado": "2023-03-06 15:54:01"
+    },
+    {
+        "id": 9,
+        "nome": "Bon appetit",
+        "contato": "Laurence Lebihans",
+        "endereco": "12 rue des Bouchers",
+        "cidade": "Marseille",
+        "cep": "13008",
+        "pais": "France",
+        "criado": "2023-03-06 15:54:02"
+    }
+]

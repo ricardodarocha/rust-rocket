@@ -6,6 +6,7 @@ use routes::{
     get_prod, get_prod_query, listar_tabelas, new_order, not_found, register, update_order,
     welcome,
 };
+use rocket::fs::{FileServer, relative};
 
 #[macro_use]
 extern crate rocket;
@@ -35,5 +36,6 @@ fn rocket() -> _ {
                 welcome,
             ],
         )
+        .mount("/static", FileServer::from(relative!("static")))
         .register("/tera", catchers![not_found])
 }
