@@ -1,9 +1,25 @@
 mod models;
 mod db;
+mod repository;
 
 use rocket::{serde::json::Json, Request};
-use models::{User, Product, OrderHeader, OrderItem, OrderTransportadora, OrderClient, Cliente, Tabelas, Url, OrderResponse};
+use models::{
+    User, 
+    CreateUser, 
+    CreatedUser, 
+    Product, 
+    OrderHeader,
+    OrderItem, 
+    OrderTransportadora, 
+    OrderClient, 
+    Cliente, 
+    Tabelas, 
+    Url, 
+    OrderResponse};
+
 use db::{get_sql, get_json, get_by_id, get_many_by_id};
+use repository::create_user;
+
 use rocket::response::Redirect;
 use rocket_dyn_templates::{Template, context};
 
@@ -50,10 +66,19 @@ pub async fn get_one(id: i64) -> Json<User> {
     Json(get_by_id::<User>("SELECT * FROM usuarios where id = ?", id).await)
 }
 
-#[post("/user/new")]
-pub async fn register() -> Json<Vec<User>> {  
-    get_json::<User>(r#"insert into usuarios (nome, login, email, senha) values ("Administrador", "admin", "admin@", "123") returning id, username, email"#)
-    .await
+#[post("/user/create", format="json", data="<data>")]
+pub async fn register(data: Json<CreateUser>) -> Json<CreatedUser> { 
+    
+    let user = CreateUser
+        { nome: data.nome.clone(),
+          login: data.login.clone(),
+          senha: data.senha.clone(),
+          email: data.email.clone()};
+
+   let created_user = create_user(user)
+    .await;
+
+    Json(created_user)
 }
 
 #[get("/order/<id>")]

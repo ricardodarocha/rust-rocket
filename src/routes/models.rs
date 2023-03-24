@@ -12,22 +12,30 @@ pub struct Url {
     sample: String,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
-pub struct NewUser { 
-    nome: String,
-    login: String,
-    senha: String,
-    email: String,
+#[derive(FromForm, Deserialize)]
+pub struct CreateUser { 
+    pub nome: String,
+    pub login: String,
+    pub senha: String,
+    pub email: String,
+}
+#[derive(Serialize, FromRow)]
+pub struct CreatedUser { 
+    pub id: i64,
+    pub nome: Option<String>,
+    pub login: Option<String>,
+    pub email: Option<String>,
+    pub criado: NaiveDateTime,
 }
 
 #[derive(Serialize, Deserialize, Debug, FromRow)]
 pub struct User { 
-    id: i64,
-    nome: String,
-    login: String,
-    senha: String,
-    email: String,
-    criado: DateTime<Utc>,
+    pub id: i64,
+    pub nome: String,
+    pub login: String,
+    pub senha: String,
+    pub email: String,
+    pub criado: NaiveDateTime,
  }
 
 // #[derive(Serialize, Deserialize, Debug, FromRow)]

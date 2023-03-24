@@ -21,7 +21,7 @@ where
         .await
         .unwrap();
 
- sqlx::query_as::<_, T>(sql)
+    sqlx::query_as::<_, T>(sql)
         .fetch_all(&mut connection)
         .await
         .unwrap()
