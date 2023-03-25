@@ -1,3 +1,5 @@
+mod tests;
+
 mod routes;
 
 use rocket_dyn_templates::Template;
